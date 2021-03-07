@@ -1,0 +1,49 @@
+create table registered_users(userid int unsigned, userfname varchar(50),
+usermobileno bigint unsigned,usermailid varchar(30),useraddress varchar(50),
+userdlno char(30),useraadharno bigint unsigned ,userpassno char(30),
+cityid smallint unsigned,stateid tinyint unsigned ,
+primary key(userid),
+foreign key(cityid)references city(cityid),
+foreign key (stateid)references state(stateid), unique(userdlno));
+
+
+
+
+
+
+create table booking(bookingid int unsigned  NOT NULL AUTO_INCREMENT,bookingdateandtime datetime NOT NULL,
+userfname varchar(50) NOT NULL,customerlname varchar(50) NOT NULL,
+usermobileno bigint unsigned NOT NULL, usermailid varchar(30) NOT NULL,userdlno char(30) NOT NULL,useraadharno bigint unsigned ,
+userpassno char(30),userid int unsigned,hubid smallint NOT NULL,cityid smallint unsigned,
+stateid tinyint unsigned ,
+primary key(bookingid),
+foreign key(userid) references registered_users(userid),
+ foreign key(hubid) references registered_users(userid),
+
+foreign key(cityid) references city(cityid),
+foreign key(stateid) references state(stateid))
+
+
+
+create table bookingdetail(bookingdetailid int unsigned NOT NULL AUTO_INCREMENT,bookingid bookingid int unsigned  NOT NULL,
+Ammenitiesid tinyint unsigned NOT NULL,AmminitiesRate int unsigned NOT NULL,
+primary key(bookingdetailid),
+oreign key(Ammenitiesid) references Ammenities(Ammenitiesid),
+foreign key(AmminitiesRate) references Ammenities(AmminitiesRate));
+
+
+
+
+
+
+
+
+
+
+create table Ammenities
+(
+ Ammenitiesid tinyint unsigned NOT NULL auto_increment,
+ AmmenitiesName varchar(50) NOT NULL,
+ AmminitiesRate int unsigned NOT NULL,
+ PRIMARY KEY (Ammenitiesid)
+);
